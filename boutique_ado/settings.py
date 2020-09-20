@@ -23,7 +23,7 @@ SECRET_KEY = 'p@ei#69*b*zz3u4yie-$()@cy^l(+x9&@6ypx+r0lm(3%_9hr7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vishkid-boutique-ado.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -116,11 +116,20 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
+DATABASES = {
+    'default': dj_database_url.parse('postgres://tkhwoenxophmbi:e9a2fa88f101688a1be852b2eef945b30060c266c2dff7524197efcf70064fab@ec2-176-34-114-78.eu-west-1.compute.amazonaws.com:5432/dci9u6obupvgn')
 }
 
 
