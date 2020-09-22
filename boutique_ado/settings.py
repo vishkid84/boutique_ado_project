@@ -119,7 +119,7 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 
 if 'DATABASE_URL' in os.environ:
     DATABASES = {
-        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
 else:
     DATABASES = {
@@ -128,11 +128,6 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
-DATABASES = {
-    'default': dj_database_url.parse('postgres://tkhwoenxophmbi:e9a2fa88f101688a1be852b2eef945b30060c266c2dff7524197efcf70064fab@ec2-176-34-114-78.eu-west-1.compute.amazonaws.com:5432/dci9u6obupvgn')
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
